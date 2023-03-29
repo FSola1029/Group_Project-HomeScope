@@ -1,0 +1,24 @@
+* {
+
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.login {
+    height: 25%;
+}
+
+body {
+    background-image: url(../imgs/background.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.header {
+    display: grid;
+    place-items: center;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
