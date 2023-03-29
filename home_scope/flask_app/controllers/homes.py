@@ -19,7 +19,7 @@ def homes_process():
     if 'user_id' not in session:
         return redirect('/user/login')
     if not Home.validating_homes(request.form):
-        return redirect('/nfts/new/one')
+        return redirect('/homes/new/one')
     data = {
         'user_id': session['user_id'],
         'name': request.form['name'],

@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous'>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj' crossorigin='anonymous'></script>
-    <!-- <link rel='stylesheet' href='{{ url_for('static', filename='/css/style.css') }}'> -->
-    <title>Login and Registration</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='/css/style.css')}}">
+    <title>HomeScope</title>
 </head>
 
     <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark py-0 px-1">
-            <div class="mr-auto p-2">
-                <a href="https://www.freepnglogos.com/pics/logo-home-png" title="Image from freepnglogos.com" class="px-2">
+        <nav class="navbar navbar-expand-sm d-flex justify-content-between py-0 px-1">
+            <div class="mr-auto d-flex justify-content-start p-2">
+                <img src="../static/imgs/logo.png" width="400" alt="logo">
+                <!-- <a href="https://www.freepnglogos.com/pics/logo-home-png" title="Image from freepnglogos.com" class="px-2">
                     <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png" width="150" alt="logo">
                 </a> 
                 <a href="https://www.fontspace.com/category/logo">
                     <img src="https://see.fontimg.com/api/renderfont4/Yznaj/eyJyIjoiZnMiLCJoIjo5NywidyI6MTQ5MCwiZnMiOjY1LCJmZ2MiOiIjRkZGRkZGIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SG9tZSBTY29wZQ/ahganirya-personal-use.png" width="150" alt="Logo fonts">
-                </a>
+                </a> -->
             </div><!-- Login/Registration Buttons -->
-            <div>
+            <div class="mr-auto d-flex justify-content-end p-2">
                 <div class="login p-2">
                     <div class="dropdown">
                         <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
@@ -49,43 +50,43 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="register p-2">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
-                    <div class="dropdown-menu col-md-6">
-                        <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
-                            <div>
-                                {% with messages = get_flashed_messages(with_categories=true) %} 
-                                    {% if messages %} 
-                                        {% for category, message in messages if category == "register" %}
-                                        <p>{{message}}</p>
-                                        {% endfor %} 
-                                    {% endif %} 
-                                {% endwith %}
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="first_name" class="text-info form-label text-dark">First Name:</label> 
-                                <input type="text" name="first_name" id="first_name" class="form-control">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="last_name" class="text-info form-label text-dark">Last Name:</label> 
-                                <input type="text" name="last_name" id="last_name" class="form-control">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="email" class="text-info form-label text-dark">Email:</label> 
-                                <input type="text" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="password" class="text-info form-label text-dark">Password:</label> 
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="confirm_password" class="text-info form-label text-dark">Confirm Password:</label> 
-                                <input type="password" name="confirm_password" id="confirm_password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-secondary">Register</button>
-                        </form>
+                <div class="register p-2">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
+                        <div class="dropdown-menu col-md-6">
+                            <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
+                                <div>
+                                    {% with messages = get_flashed_messages(with_categories=true) %} 
+                                        {% if messages %} 
+                                            {% for category, message in messages if category == "register" %}
+                                            <p>{{message}}</p>
+                                            {% endfor %} 
+                                        {% endif %} 
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="first_name" class="text-info form-label text-dark">First Name:</label> 
+                                    <input type="text" name="first_name" id="first_name" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="last_name" class="text-info form-label text-dark">Last Name:</label> 
+                                    <input type="text" name="last_name" id="last_name" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email" class="text-info form-label text-dark">Email:</label> 
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="password" class="text-info form-label text-dark">Password:</label> 
+                                    <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="confirm_password" class="text-info form-label text-dark">Confirm Password:</label> 
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-secondary">Register</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

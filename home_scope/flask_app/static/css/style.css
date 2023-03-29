@@ -1,5 +1,4 @@
 * {
-
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -8,18 +7,26 @@
     height: 25%;
 }
 
-body {
+.hero {
     background-image: url(../imgs/background.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 800;
 }
+
+nav {
+    background-color: rgba(0, 0, 0, 0.254);
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .header {
     display: grid;
