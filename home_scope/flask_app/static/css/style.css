@@ -16,9 +16,71 @@ body {
     background-repeat: no-repeat;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: 800;
+}
+
 .header {
     display: grid;
     place-items: center;
-    gap: 20px;
+    gap: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+    .header img {
+        max-width: 100%;
+        height: auto;
+    }
+
+.dash-header {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.formcard {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+    .formcard input {
+        margin-bottom: 5px;
+    }
+
+
+.btn-hover {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 5px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.grad {
+    background-image: linear-gradient(to right, #4c373a, #b43516, #ef9d43, #e75516);
+    box-shadow: 0 4px 15px 0 rgba(130, 78, 80, 0.75);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    min-width: 100vw;
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
 }

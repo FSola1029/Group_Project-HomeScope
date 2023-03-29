@@ -40,14 +40,17 @@ def view_homes():
 def view_homes_two(homes_id):
     if 'user_id' not in session:
         return redirect('/user/login')
-    return render_template('view.html',users= Home.fetch_by_user_id ({"id":homes_id}), logged= User.fetch_id({"id":session['user_id']}))
+    return render_template('view.html',users=Home.fetch_by_user_id ({"id":homes_id}), logged= User.fetch_id({"id":session['user_id']}))
 
 
 @app.route('/homes/edit/<int:id>')
 def edit_homes(id):
     if 'user_id' not in session:
         return redirect('/user/login')
-    return render_template('edit.html',homes= Home.fetch_id({'id': id}))
+    user = User.fetch_id({"id":session['user_id']})
+    if not user:
+        return redirect('/user/logout')
+    return render_template('edit.html',user=user, homes=Home.fetch_id({'id': id}))
 
 
 @app.route('/homes/edit/process/<int:id>', methods=['POST'])
