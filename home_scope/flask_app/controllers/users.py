@@ -15,7 +15,7 @@ def index():
 def login():
     if 'user_id' in session:
         return redirect('/dashboard')
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @app.route('/user/logged_in/process', methods=['POST'])

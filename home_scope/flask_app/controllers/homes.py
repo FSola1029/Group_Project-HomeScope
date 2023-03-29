@@ -8,7 +8,10 @@ from flask_app.models.user import User
 def create_homes():
     if 'user_id' not in session:
         return redirect('/user/login')
-    return render_template('new.html', homes= User.fetch_id({"id":session['user_id']}))
+    user = User.fetch_id({"id":session['user_id']})
+    if not user:
+        return redirect('/user/logout')
+    return render_template('new.html', user=user, homes= User.fetch_id({"id":session['user_id']}))
 
 
 @app.route('/homes/new/process', methods=['POST'])
@@ -33,14 +36,20 @@ def homes_process():
 def view_homes():
     if 'user_id' not in session:
         return redirect('/user/login')
-    return render_template('view.html',users= User.fetch_id({"id":session['user_id']}))
+    user = User.fetch_id({"id":session['user_id']})
+    if not user:
+        return redirect('/user/logout')
+    return render_template('view.html', user=user, users= User.fetch_id({"id":session['user_id']}))
 
 
 @app.route('/my/homes/<int:homes_id>')
 def view_homes_two(homes_id):
     if 'user_id' not in session:
         return redirect('/user/login')
-    return render_template('view.html',users=Home.fetch_by_user_id ({"id":homes_id}), logged= User.fetch_id({"id":session['user_id']}))
+    user = User.fetch_id({"id":session['user_id']})
+    if not user:
+        return redirect('/user/logout')
+    return render_template('view.html', user=user, users=Home.fetch_by_user_id ({"id":homes_id}), logged= User.fetch_id({"id":session['user_id']}))
 
 
 @app.route('/homes/edit/<int:id>')
