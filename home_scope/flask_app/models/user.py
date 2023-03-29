@@ -1,5 +1,4 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import home
 from flask import flash
 from flask_app import app
 from flask_bcrypt import Bcrypt
@@ -9,7 +8,7 @@ import re
 
 db = "homescope"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-class Users:
+class User:
     def __init__(self, db_data):
         self.id = db_data['id']
         self.first_name = db_data['first_name']
@@ -69,7 +68,7 @@ class Users:
         elif not EMAIL_REGEX.match(data_form['email']):
             flash("Email address invalid.","register")
             valid = False
-        elif Users.fetch_email(data_form):
+        elif User.fetch_email(data_form):
             flash("User exists for email.","register")
             valid = False
         if len(data_form['password']) < 6:
@@ -95,7 +94,7 @@ class Users:
         if not EMAIL_REGEX.match(data_form['email']):
             flash("Email/Password invalid.","login")
             return False
-        the_user = Users.fetch_email(data_form)
+        the_user = User.fetch_email(data_form)
         if not the_user:
             flash("Email/Password invalid.","login")
             return False

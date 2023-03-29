@@ -6,7 +6,7 @@ from flask import flash
 db = "homescope"
 
 
-class Homes:
+class Home:
     def __init__(self, data):
         self.id = data['id']
         self.name = data['name']
@@ -43,7 +43,7 @@ class Homes:
                 "created_at": rows['users.created_at'],
                 "updated_at": rows['users.updated_at']
             }
-            creator = user.Users(user_homes_data)
+            creator = user.User(user_homes_data)
             my_homes.maker= creator
             home_list.append(my_homes)
         print(home_list)
@@ -72,7 +72,7 @@ class Homes:
             "created_at": results['users.created_at'],
             "updated_at": results['users.updated_at']
         }
-        my_homes.maker = user.Users(user_homes_data)
+        my_homes.maker = user.User(user_homes_data)
         return my_homes
 
 
@@ -97,7 +97,7 @@ class Homes:
                 "created_at": results[0]['users.created_at'],
                 "updated_at": results[0]['users.updated_at']
             }
-            my_homes.maker = user.Users(the_creator)
+            my_homes.maker = user.User(the_creator)
             colosseum.append(my_homes)
         return colosseum
 

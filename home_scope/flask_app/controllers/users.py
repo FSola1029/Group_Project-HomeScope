@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
-from flask_app.models.user import Users
-from flask_app.models.home import Homes
+from flask_app.models.user import User
+from flask_app.models.home import Home
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -20,7 +20,7 @@ def login():
 
 @app.route('/user/logged_in/process', methods=['POST'])
 def login_success():
-    user = Users.login_validator(request.form)
+    user = User.login_validator(request.form)
     if not user:
         flash("invalid email/password")
         return redirect('/user/login')
@@ -33,18 +33,18 @@ def login_success():
 def dashboard():
     if 'user_id' not in session:
         return redirect('/user/login')
-    user = Users.fetch_id({"id":session['user_id']})
+    user = User.fetch_id({"id":session['user_id']})
     if not user:
         return redirect('/user/logout')
-    return render_template('dashboard.html', user=user, homes= Homes.fetch_all())
+    return render_template('dashboard.html', user=user, homes= Home.fetch_all())
 
 
 
 @app.route('/user/registration/process', methods=['POST'])
 def register_success():
-    if not Users.validate_regis_form(request.form):
+    if not User.validate_regis_form(request.form):
         return redirect('/user/login')
-    user_id = Users.save(request.form)
+    user_id = User.save(request.form)
     session['user_id'] = user_id
     return redirect('/dashboard')
 
