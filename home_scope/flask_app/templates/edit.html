@@ -4,9 +4,18 @@
 {% block title %}Edit Homes{% endblock %}
 
 {% block nav %}
-<a href="/homes/new/one" class="btn btn-success  text-dark border-primary-emphasis  border-2 offset-3 col-1" style="height: 85%; width: auto;">Add Home</a>
-<a href="/dashboard" class="btn btn-success  text-dark border-primary-emphasis  border-2 col-1" style="height: 85%; width: auto;">Dashboard</a>
-<a href="/user/logout" class="btn btn-warning text-dark  border-primary-emphasis border-2 col-1" style="height: 80%; width: auto;">Logout</a>
+<h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
+<div class="d-flex">
+    <div class="p-2">
+        <a href="/homes/new/one" class="btn btn-md btn-secondary">Add Homes</a>
+    </div>
+    <div class="p-2">
+        <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
+    </div>
+    <div class="p-2">
+        <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
+    </div>
+</div>
 {% endblock %}
             
 {% block content %}
