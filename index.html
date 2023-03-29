@@ -28,9 +28,13 @@
                         <div class="dropdown-menu col-md-6">
                             <form action="/user/logged_in/process" method="post" class="col-10 mx-auto border-0 p-0">
                                 <div>
-                                    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {%
-                                    for category, message in messages if category == "login" %}
-                                    <p>{{message}}</p>{% endfor %} {% endif %} {% endwith %}
+                                    {% with messages = get_flashed_messages(with_categories=true) %} 
+                                        {% if messages %} 
+                                            {% for category, message in messages if category == "login" %}
+                                            <p>{{message}}</p>
+                                            {% endfor %} 
+                                        {% endif %} 
+                                    {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="email" class="text-info form-label text-dark">Email:</label> <input
@@ -52,9 +56,13 @@
                     <div class="dropdown-menu col-md-6">
                         <form action="/user/registration/process" method="post" class="col-10 mx-auto border-0 p-0">
                             <div>
-                                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for
-                                category, message in messages if category == "register" %}
-                                <p>{{message}}</p>{% endfor %} {% endif %} {% endwith %}
+                                {% with messages = get_flashed_messages(with_categories=true) %} 
+                                    {% if messages %} 
+                                        {% for category, message in messages if category == "register" %}
+                                        <p>{{message}}</p>
+                                        {% endfor %} 
+                                    {% endif %} 
+                                {% endwith %}
                             </div>
                             <div class="form-group mb-3">
                                 <label for="first_name" class="text-info form-label text-dark">First Name:</label> <input

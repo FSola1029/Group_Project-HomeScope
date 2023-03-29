@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous'>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj' crossorigin='anonymous'></script>
+    <!-- <link rel='stylesheet' href='{{ url_for('static', filename='/css/style.css') }}'> -->
+    <title>Login and Registration</title>
+</head>
+
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark py-0 px-1">
+            <div class="mr-auto p-2">
+                <a href="https://www.freepnglogos.com/pics/logo-home-png" title="Image from freepnglogos.com" class="px-2">
+                    <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png" width="150" alt="logo">
+                </a> 
+                <a href="https://www.fontspace.com/category/logo">
+                    <img src="https://see.fontimg.com/api/renderfont4/Yznaj/eyJyIjoiZnMiLCJoIjo5NywidyI6MTQ5MCwiZnMiOjY1LCJmZ2MiOiIjRkZGRkZGIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SG9tZSBTY29wZQ/ahganirya-personal-use.png" width="150" alt="Logo fonts">
+                </a>
+            </div><!-- Login/Registration Buttons -->
+            <div>
+                <div class="login p-2">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
+                            data-bs-toggle="dropdown">Login</button>
+                        <div class="dropdown-menu col-md-6">
+                            <form action="/user/login" method="post" class="col-10 mx-auto border-0 p-0">
+                                <div>
+                                    {% with messages = get_flashed_messages(with_categories=true) %} 
+                                        {% if messages %} 
+                                            {% for category, message in messages if category == "login" %}
+                                            <p>{{message}}</p>
+                                            {% endfor %} 
+                                        {% endif %} 
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email" class="text-info form-label text-dark">Email:</label> 
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="password" class="text-info form-label text-dark">Password:</label> 
+                                    <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-secondary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="register p-2">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
+                    <div class="dropdown-menu col-md-6">
+                        <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
+                            <div>
+                                {% with messages = get_flashed_messages(with_categories=true) %} 
+                                    {% if messages %} 
+                                        {% for category, message in messages if category == "register" %}
+                                        <p>{{message}}</p>
+                                        {% endfor %} 
+                                    {% endif %} 
+                                {% endwith %}
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="first_name" class="text-info form-label text-dark">First Name:</label> 
+                                <input type="text" name="first_name" id="first_name" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="last_name" class="text-info form-label text-dark">Last Name:</label> 
+                                <input type="text" name="last_name" id="last_name" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email" class="text-info form-label text-dark">Email:</label> 
+                                <input type="text" name="email" id="email" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="password" class="text-info form-label text-dark">Password:</label> 
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="confirm_password" class="text-info form-label text-dark">Confirm Password:</label> 
+                                <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-secondary">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- Our Mission -->
+        <section id="mission" class="p-5">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg">
+                        <img src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg" class="img-fluid" alt="first">
+                    </div>
+                    <div class="col-md p-5">
+                        <h2>Our Mission</h2>
+                        <p class="lead">To make listing and selling your house as simple as possible.</p>
+                        <p>Everyone hates the hassle that comes with selling a house. Let us handle everything on your
+                            behalf.Just give us some basic details about your property and we'll take care of the rest.
+                            Register today!</p>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Houses -->
+        <div class="container">
+            <div id="houses" class="houses houses-dark text-center py-2">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg"
+                                class="card-img-top" alt="single">
+                            <div class="card-body">
+                                <h5 class="card-title">Single Family Homes</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <div class="card">
+                            <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
+                                class="card-img-top" alt="town">
+                            <div class="card-body">
+                                <h5 class="card-title">Townhouse</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <div class="card">
+                            <img src="https://www.mashvisor.com/blog/wp-content/uploads/2020/03/Why-Small-Multi-Family-Homes-Are-the-Best-Income-Generating-Assets-for-Beginners.jpg"
+                                class="card-img-top" alt="multi">
+                            <div class="card-body">
+                                <h5 class="card-title">Multi Family Homes</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
