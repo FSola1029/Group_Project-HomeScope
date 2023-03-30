@@ -8,7 +8,13 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    return render_template('login2.html')
+    all_homes = Home.get_all_homes()
+    for i in range(len(all_homes)):
+        print(i)
+    single_homes = Home.get_homes_by_type({'type': 'Single Family Homes'})
+    townhouse = Home.get_homes_by_type({'type': 'Townhouse'})
+    multi_homes = Home.get_homes_by_type({'type': 'Multi Family Homes'})
+    return render_template('login2.html', all_homes=all_homes, single_homes = single_homes, townhouse=townhouse, multi_homes=multi_homes)
 
 
 @app.route('/user/login', methods=['POST'])

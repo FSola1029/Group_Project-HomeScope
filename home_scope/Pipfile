@@ -10,6 +10,8 @@ flash = "*"
 pymysql = "*"
 cryptography = "*"
 bcrypt = "*"
+flask-wtf = "*"
+flask-uploads = "*"
 
 [dev-packages]
 

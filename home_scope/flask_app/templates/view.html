@@ -1,32 +1,106 @@
 <!-- new.html -->
 {% extends 'index.html' %}
 
-{% block title %}Home Info{% endblock %}
+{% block title %}Home Listings{% endblock %}
 
 {% block nav %}
-<h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
+<a href="/"><img src="/imgs/logo.png" width="400" alt="logo"></a>
+
+<!-- Login/Registration Buttons -->
 <div class="d-flex">
-    <div class="p-2">
-        <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
+    <div class="login p-2">
+        <div class="dropdown">
+            <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
+                data-bs-toggle="dropdown">Login</button>
+            <div class="dropdown-menu col-md-6">
+                <form action="/user/login" method="post" class="col-10 mx-auto border-0 p-0">
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                            {% if messages %}
+                            <ul class="alert-message block-message error">
+                                {% for message in messages %}
+                                <li class="text-danger">{{message}}</li> 
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="text-info form-label text-dark">Email:</label> 
+                        <input type="text" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password" class="text-info form-label text-dark">Password:</label> 
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-secondary">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="p-2">
-        <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
+    <div class="register p-2">
+        <div class="dropdown">
+            <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
+            <div class="dropdown-menu col-md-6">
+                <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter=["register"]) %}
+                            {% if messages %}
+                            <ul class="alert-message block-message error">
+                                {% for message in messages %}
+                                <li class="text-danger">{{message}}</li> 
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="first_name" class="text-info form-label text-dark">First Name:</label> 
+                        <input type="text" name="first_name" id="first_name" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="last_name" class="text-info form-label text-dark">Last Name:</label> 
+                        <input type="text" name="last_name" id="last_name" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="text-info form-label text-dark">Email:</label> 
+                        <input type="text" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password" class="text-info form-label text-dark">Password:</label> 
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="confirm_password" class="text-info form-label text-dark">Confirm Password:</label> 
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-secondary">Register</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<h2>Home Info</h2>
-{% for i in users %}
-<div class="row border border-primary-emphasis border-4 my-4 bg-dark text-white rounded rounded-3 p-5 fs-4">
-    <div class="row mb-4">
-        <p class="text-warning col-8">Owner: {{i.name}}</p>
-        <p class="text-warning col-8">Street Address: {{i.street_address}}</p>
-        <p class="text-warning col-8">Description: {{i.description}}</p>
-        <p class="text-warning col-8">Price: {{i.price}}</p>
+<h2>{{homes[0].type}} Listings</h2>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for home in homes %}
+    <div class="col">
+        <div class="card">
+            <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="card-img-top" alt="single">
+            <div class="card-body">
+                <h5 class="card-title">${{home.price}}</h5>
+                <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
+                <div class="card-text d-flex justify-content-between align-items-center">
+                    <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+                </div>
+            </div>
+        </div>
     </div>
+    {% endfor %}
+    
 </div>
-{% endfor %}
 {% endblock %}
 
 {% set page = 'view' %}

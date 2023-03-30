@@ -7,7 +7,7 @@
 <h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
 <div class="d-flex">
     <div class="p-2">
-        <a href="/homes/new/one" class="btn btn-md btn-secondary">Add Homes</a>
+        <a href="/homes/new" class="btn btn-md btn-secondary">Add Homes</a>
     </div>
     <div class="p-2">
         <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
@@ -18,29 +18,27 @@
 
 {% block content %}
 <h2>Homes</h2>
-<table class="table table-dark table-striped table-hover border border-4 border-primary-emphasis fs-4 mt-4 text-center">
-    <thead>
-        <tr>
-            <th>Homes</th>
-            <th>Owner</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for my_homes in homes %}
-            <tr>
-                <td><a href="/my/homes/{{my_homes.id}}" class="btn border-primary-emphasis btn-success text-dark">{{my_homes.street_address}}</a></td>
-                <td>{{my_homes.maker.first_name}}</td>
-                <td>
-                {% if session['user_id'] == my_homes.maker.id %}
-                    <a href="/homes/edit/{{my_homes.id}}" class="btn btn-success border-4  text-dark">Edit</a>
-                    <a href="/homes/delete/{{my_homes.id}}" class="btn btn-warning boder-2  text-dark">Delete</a>
-                </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for home in homes %}
+    <div class="col">
+        <div class="card">
+            <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="card-img-top" alt="single">
+            <div class="card-body">
+                <h5 class="card-title">${{home.price}}</h5>
+                <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
+                <div class="card-text d-flex justify-content-between align-items-center">
+                    <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+                    <div>
+                        <a href="/homes/edit/{{home.id}}" class="btn btn-secondary">Edit</a>
+                        <a href="/homes/delete/{{home.id}}" class="btn btn-secondary">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
 {% endblock %}
 
 {% set page = 'dashboard' %}

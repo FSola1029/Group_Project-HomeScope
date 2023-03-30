@@ -33,9 +33,6 @@ class User:
         return connectToMySQL(db).query_db(query,data_hashing)
 
 
-
-
-
     @classmethod
     def fetch_email(cls,data):
         query = " SELECT * FROM users WHERE email = %(email)s; "
@@ -46,8 +43,6 @@ class User:
 
 
 
-
-
     @classmethod
     def fetch_id(cls,data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
@@ -55,8 +50,6 @@ class User:
         if not result:
             return False
         return cls(result[0])
-
-
 
 
     @staticmethod
@@ -84,8 +77,6 @@ class User:
             flash("Last name must be 3 characters minimum.","register")
             valid = False
         return valid
-
-
 
 
 

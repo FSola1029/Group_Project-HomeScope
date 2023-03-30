@@ -7,7 +7,7 @@
 <h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
 <div class="d-flex">
     <div class="p-2">
-        <a href="/homes/new/one" class="btn btn-md btn-secondary">Add Homes</a>
+        <a href="/homes/new" class="btn btn-md btn-secondary">Add Homes</a>
     </div>
     <div class="p-2">
         <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
@@ -20,38 +20,99 @@
             
 {% block content %}
 
-<h2 class="p-0  mt-4 col 6">Edit Home</h2>
+<h2>Edit Home</h2>
 
-<form action="/homes/edit/process/{{homes.id}}" method="post" class="col-12 mx-auto border-4 border-primary-emphasis bg-dark text-white p-3">
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{message}}</p>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-<div class="row">
-    <div class="col-4 offset-1">
-        <div class="form-group mb-3">
-            <label for="name" class=" text-success form-label">Owner:</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{homes.name}}">
+<div class="card mb-3 px-0">
+    <form action="/homes/update/{{home.id}}" method="post">
+        <div class="row g-0">
+            <div class="col-md-4 p-3">
+                <form action="/homes/edit/{{home.id}}/upload_img">
+                    <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="img-fluid rounded" alt="single">
+                    <div class="input-group mt-4">
+                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button class="btn btn-outline-secondary" type="submit">Upload</button>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="col-md-8 card-body">
+                {% with messages = get_flashed_messages(category_filter=["home_info"]) %}
+                    {% if messages %}
+                    <ul class="alert-message block-message error">
+                        {% for message in messages %}
+                        <li class="{{category}} text-danger">{{message}}</li> 
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% endwith %}
+                <div class="row g-3 ">
+                    <div class="form-group col-md-2 mb-3">
+                        <label for="name" class=" text-success form-label">Owner:</label>
+                        <input type="text" name="name" class="form-control" value="{{home.name}}">
+                    </div>
+                    <div class="form-group col-md-1 mb-3">
+                        <label for="street_address" class=" text-success form-label">Bed:</label>
+                        <input type="number" name="bed" class="form-control" value="{{home.bed}}">
+                    </div>
+                    <div class="form-group col-md-1 mb-3">
+                        <label for="street_address" class=" text-success form-label">Bath:</label>
+                        <input type="number" name="bath" class="form-control" value="{{home.bath}}">
+                    </div>
+                    <div class="form-group col-md-2 mb-3">
+                        <label for="street_address" class=" text-success form-label">Square Feet:</label>
+                        <div class="input-group">
+                            <input type="text" name="sq_ft" class="form-control" value="{{home.sq_ft}}">
+                            <span class="input-group-text">ft</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="street_address" class=" text-success form-label">House Type:</label>
+                        <select class="form-select" name="type">
+                            {% for type in home_types%}
+                                {% if type == home.type %}
+                                    <option selected value="{{type}}">{{type}}</option>
+                                {% else %}
+                                    <option value="{{type}}">{{type}}</option>
+                                {% endif %}
+                                
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2 mb-3">
+                        <label for="price" class="text-success form-label">Price:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" name='price' id="price" class="form-control" value="{{home.price}}">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="street_address" class=" text-success form-label">Street Address:</label>
+                        <input type="text" name="street_address" class="form-control" value="{{home.street_address}}">
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="street_address" class=" text-success form-label">City:</label>
+                        <input type="text" name="city" class="form-control" value="{{home.city}}">
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="street_address" class=" text-success form-label">State:</label>
+                        <input type="text" name="state" class="form-control" value="{{home.state}}">
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="street_address" class=" text-success form-label">Zip Code:</label>
+                        <input type="text" name="zipcode" class="form-control" value="{{home.zipcode}}">
+                    </div>
+                    <div class="form-group col-md-12 mb-3">
+                        <label for="description" class=" text-success form-label">Description:</label>
+                        <textarea name="description" class="form-control" rows="4">{{home.description}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 my-4 d-flex justify-content-center">
+                <button type= "submit" class="btn btn-secondary col-2">Update</button>
+            </div>
         </div>
-        <div class="form-group mb-3">
-            <label for="street_address" class=" text-success form-label">Street Address:</label>
-            <input type="text" name="street_address" id="street_address" class="form-control" value="{{homes.street_address}}">
-        </div>
-        <div class="form-group mb-3">
-            <label for="description" class=" text-success form-label">Description:</label>
-            <textarea name="description" id="description" class="form-control">{{homes.description}}</textarea>
-        </div>
-        <div class="form-group mb-3">
-            <label for="price" class="text-success form-label">Price:</label>
-            <input type="number" name='price' id="price" class="form-control">{{homes.price}}</input>
-        </div>
-    </div>
+    </form>
 </div>
-<button type= "submit" class="btn btn-warning ms-5 text-dark mt-2 border-2">Update</button>
-</form>
 {% endblock %}
 
 {% set page = 'edit' %}
