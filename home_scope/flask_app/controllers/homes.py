@@ -62,7 +62,15 @@ def homes_process():
 
 @app.route('/homes/view/<home_type>')
 def view_homes(home_type):
-    homes = Home.get_homes_by_type({'type': home_type})
+    if "user_id" not in session:
+        homes = Home.get_homes_by_type({'type': home_type})
+    else:
+        data = {
+            'id': session['user_id'],
+            'type': home_type
+        }
+        homes = Home.get_homes_type_by_user(data)
+        print(homes[0].maker)
     return render_template('view.html', homes=homes)
 
 @app.route('/homes/details/<home_id>')

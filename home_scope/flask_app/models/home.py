@@ -68,6 +68,29 @@ class Home:
         for item in results:
             homes.append(cls(item))
         return homes
+    
+    @classmethod
+    def get_homes_type_by_user(cls, data):
+        query = "SELECT * FROM homes LEFT JOIN users ON homes.user_id = users.id WHERE users.id = %(id)s AND homes.type = %(type)s "
+        results = connectToMySQL(db).query_db(query,data)
+        if not results:
+            return False
+        homes = []
+        for item in results:
+            this_home = cls(item)
+            data = {
+                "id": item['users.id'],
+                "first_name": item['first_name'],
+                "last_name": item['last_name'],
+                "email": item['email'],
+                "password": item['password'],
+                "created_at": item['users.created_at'],
+                "updated_at": item['users.updated_at']
+            }
+            this_home.maker = user.User(data)
+            homes.append(this_home)
+        return homes
+
 
     @classmethod
     def get_home_by_id(cls, data):

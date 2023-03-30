@@ -4,6 +4,20 @@
 {% block title %}Home Listings{% endblock %}
 
 {% block nav %}
+{% if homes[0].maker %}
+<h1 class="p-0 text-dark col-6">Welcome, {{homes[0].maker.first_name|capitalize}}.</h1>
+<div class="d-flex">
+    <div class="p-2">
+        <a href="/homes/new" class="btn btn-md btn-secondary">Add Homes</a>
+    </div>
+    <div class="p-2">
+        <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
+    </div>
+    <div class="p-2">
+        <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
+    </div>
+</div>
+{% else %}
 <a href="/"><img src="/imgs/logo.png" width="400" alt="logo"></a>
 
 <!-- Login/Registration Buttons -->
@@ -80,6 +94,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -92,10 +107,16 @@
             <img src="{{home.image}}" class="card-img-top" alt="single" style="height: 20rem;">
             </a>
             <div class="card-body">
-                <h5 class="card-title">$ {{ '{:,.2f}'.format(home.price) }}</h5>
+                <h5 class="card-title">$ {{ '{:,}'.format(home.price) }}</h5>
                 <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
                 <div class="card-text d-flex justify-content-between align-items-center">
                     <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+                    {% if home.maker %}
+                    <div>
+                        <a href="/homes/edit/{{home.id}}" class="btn btn-secondary">Edit</a>
+                        <a href="/homes/delete/{{home.id}}" class="btn btn-secondary">Delete</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
