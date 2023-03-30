@@ -27,10 +27,11 @@
         <div class="row g-0">
             <div class="col-md-4 p-3">
                     <div class="card">
-                        <img src="/imgs/background.jpg" class="img-fluid rounded" alt="single">
+                        <img src="{{home.image}}" class="img-fluid rounded" alt="single">
                     </div>
                     <div class="input-group mt-4">
-                        <input type="file" class="form-control" name="image" aria-label="Upload">
+                        <input type="file" id='file-input' class="form-control" name="image" aria-label="Upload" value="{{home.image}}">
+                        <input type="hidden" name="image_url" value="{{home.image}}">
                     </div>
                 </form>
             </div>

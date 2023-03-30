@@ -103,14 +103,14 @@
                         {% for i in range(all_homes|length)%}
                             {% if i == 0 %}
                             <div class="carousel-item active" style="height: 24rem;">
-                                <a href="/homes/view/{{all_homes[i].type}}">
+                                <a href="/homes/view/All">
                                 <img src="{{all_homes[i].image}}"
                                 class="card-img-top" alt="{{all_homes[i].type}}"  style="height: 24rem;">
                                 </a>
                             </div>
                             {% else %}
                             <div class="carousel-item" style="height: 24rem;">
-                                <a href="/homes/view/{{all_homes[i].type}}">
+                                <a href="/homes/view/All">
                                 <img src="{{all_homes[i].image}}"
                                 class="card-img-top" alt="{{all_homes[i].type}}" style="height: 24rem;">
                                 </a>

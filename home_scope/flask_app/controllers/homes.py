@@ -62,7 +62,9 @@ def homes_process():
 
 @app.route('/homes/view/<home_type>')
 def view_homes(home_type):
-    if "user_id" not in session:
+    if home_type == "All":
+        homes = Home.get_all_homes()
+    elif "user_id" not in session:
         homes = Home.get_homes_by_type({'type': home_type})
     else:
         data = {
@@ -70,8 +72,8 @@ def view_homes(home_type):
             'type': home_type
         }
         homes = Home.get_homes_type_by_user(data)
-        print(homes[0].maker)
-    return render_template('view.html', homes=homes)
+        home_type = home_type
+    return render_template('view.html', homes=homes, home_type=home_type)
 
 @app.route('/homes/details/<home_id>')
 def view_home_details(home_id):
@@ -97,14 +99,15 @@ def edit_homes(home_id):
 def update_homes(home_id):
     if 'user_id' not in session:
         return redirect('/')
-    if not request.files['image']:
-        flash(u"You must upload an image", "home_info")
-        return redirect(url_for('edit_homes', home_id=home_id))
+    if not request.form['image_url']:
+        file = request.files['image']
+        upload_result = cloudinary.uploader.upload(file)
+        image_url = upload_result['url']
+    else: 
+        image_url = request.form['image_url']
     if not Home.validating_homes(request.form):
         return redirect(url_for('edit_homes', home_id=home_id))
-    file = request.files['image']
-    upload_result = cloudinary.uploader.upload(file)
-    image_url = upload_result['url']
+
     data = {
         'id': home_id,
         'user_id': session['user_id'],
