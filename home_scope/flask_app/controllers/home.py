@@ -17,8 +17,8 @@ class Home:
         self.zipcode = data ['zipcode']
         self.description= data['description']
         self.bed = data['bed']
-        self.bath = data['bath']
-        self.sq_ft = data['sq_ft']
+        self.bath = ['bath']
+        self.sq_ft = ['sq_ft']
         self.price = data['price']
         self.type = data['type']
         self.image = data['image']
@@ -49,56 +49,29 @@ class Home:
         return home_list
 
 
-    @classmethod
-    def get_all_homes(cls):
-        query = "SELECT * FROM homes;"
-        results = connectToMySQL(db).query_db(query)
-        homes = []
-        for item in results:
-            homes.append(cls(item))
-        return homes
-    
-    @classmethod
-    def get_homes_by_type(cls, data):
-        query = "SELECT * FROM homes WHERE type = %(type)s;"
-        results = connectToMySQL(db).query_db(query, data)
-        homes = []
-        if not results:
-            return homes
-        for item in results:
-            homes.append(cls(item))
-        return homes
 
-    @classmethod
-    def get_home_by_id(cls, data):
-        query = "SELECT * FROM homes WHERE id = %(id)s"
-        results = connectToMySQL(db).query_db(query, data)
-        if not results:
-            return False
-        print(results)
-        return cls(results[0])
+
 
     @classmethod
     def fetch_id(cls,data):
-        query = "SELECT * FROM homes LEFT JOIN users ON homes.user_id = users.id WHERE users.id = %(id)s;"
+        query = "SELECT * FROM homes JOIN users ON homes.user_id = users.id WHERE homes.id = %(id)s;"
         results = connectToMySQL(db).query_db(query,data)
+        print(results)
         if not results:
             return False
-        homes = []
-        for item in results:
-            this_home = cls(item)
-            data = {
-                "id": item['users.id'],
-                "first_name": item['first_name'],
-                "last_name": item['last_name'],
-                "email": item['email'],
-                "password": item['password'],
-                "created_at": item['users.created_at'],
-                "updated_at": item['users.updated_at']
-            }
-            this_home.maker = user.User(data)
-            homes.append(this_home)
-        return homes
+        results = results[0]
+        my_homes = cls(results)
+        user_homes_data = {
+            "id": results['users.id'],
+            "first_name": results['first_name'],
+            "last_name": results['last_name'],
+            "email": results['email'],
+            "password": "",
+            "created_at": results['users.created_at'],
+            "updated_at": results['users.updated_at']
+        }
+        my_homes.maker = user.User(user_homes_data)
+        return my_homes
 
 
     @classmethod
@@ -124,11 +97,13 @@ class Home:
         return colosseum
 
 
+
+
     @classmethod
     def save(cls,data_form):
         query = "INSERT INTO homes (name, street_address, city, state, zipcode, description, \
-            bed, bath, sq_ft, price, image, type, user_id) VALUES (%(name)s, %(street_address)s, %(city)s, %(state)s, %(zipcode)s, \
-            %(description)s, %(bed)s, %(bath)s, %(sq_ft)s, %(price)s, %(image)s, %(type)s, %(user_id)s);"
+            bed, bath, sq_ft, price, image, user_id) VALUES (%(name)s, %(street_address)s, %(city)s, %(state)s, %(zipcode)s, \
+            %(description)s, %(bed)s, %(bath)s, %(sq_ft)s, %(price)s, %(image)s, %(user_id)s);"
         results = connectToMySQL(db).query_db(query,data_form)
         print(results)
         return results
@@ -138,7 +113,7 @@ class Home:
     @classmethod
     def update(cls, data_form):
         query = "UPDATE homes SET name = %(name)s, street_address = %(street_address)s, city = %(city)s, state = %(state)s, zipcode = %(zipcode)s, description = %(description)s, \
-                bed = %(bed)s, bath = %(bath)s, sq_ft = %(sq_ft)s, price = %(price)s, image = %(image)s, type=%(type)s WHERE id = %(id)s;"
+                bed = %(bed)s, bath = %(bath)s, sq_ft = %(sq_ft)s, price = %(price)s, image = %(image)s WHERE id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data_form)
         return results
 
@@ -171,24 +146,18 @@ class Home:
         if not(data_form['price']) or int(data_form['price']) <= 0:
             flash(u"Invalid price.", "home_info")
             is_valid = False
-        if not ZIP_REGEX.match(data_form['zipcode']) or len(data_form['zipcode']) > 5:
+        if not ZIP_REGEX.match(data_form['zipcode']):
             flash(u'Invalid zip code!', 'home_info')
-            is_valid = False
-        if not STATE_REGEX.match(data_form['state']) or len(data_form['state']) > 2:
+        if not ZIP_REGEX.match(data_form['state']):
             flash(u'Invalid state!', 'home_info')
-            is_valid = False
         if len(data_form['city'])  < 3:
             flash(u"Invalid city name", "home_info")
-            is_valid = False
         if not(data_form['bed']) or int(data_form['bed']) <= 0:
             flash(u"Invalid bed counts.", "home_info")
-            is_valid = False
         if not(data_form['sq_ft']) or int(data_form['sq_ft']) <= 0:
             flash(u"Invalid square feets.", "home_info")
-            is_valid = False
         if not(data_form['bath']) or int(data_form['bath']) <= 0:
             flash(u"Invalid bath counts.", "home_info")
-            is_valid = False
         return is_valid
 
 

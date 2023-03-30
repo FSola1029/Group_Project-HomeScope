@@ -19,24 +19,28 @@
 {% block content %}
 <h2>Homes</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-    {% for home in homes %}
-    <div class="col">
-        <div class="card">
-            <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="card-img-top" alt="single">
-            <div class="card-body">
-                <h5 class="card-title">${{home.price}}</h5>
-                <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
-                <div class="card-text d-flex justify-content-between align-items-center">
-                    <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
-                    <div>
-                        <a href="/homes/edit/{{home.id}}" class="btn btn-secondary">Edit</a>
-                        <a href="/homes/delete/{{home.id}}" class="btn btn-secondary">Delete</a>
+    {% if homes %}
+        {% for home in homes %}
+        <div class="col">
+            <div class="card">
+                <a href="/homes/details/{{home.id}}">
+                <img src="{{home.image}}" class="card-img-top" alt="single" style="height: 20rem;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">$ {{ '{:,}'.format(home.price) }}</h5>
+                    <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
+                    <div class="card-text d-flex justify-content-between align-items-center">
+                        <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+                        <div>
+                            <a href="/homes/edit/{{home.id}}" class="btn btn-secondary">Edit</a>
+                            <a href="/homes/delete/{{home.id}}" class="btn btn-secondary">Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
     
 </div>
 {% endblock %}

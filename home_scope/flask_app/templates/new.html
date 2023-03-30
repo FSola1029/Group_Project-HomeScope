@@ -18,21 +18,19 @@
 {% block content %}
 <h2>Add Home</h2>
 <div class="card mb-3 px-0">
-    <form action="/homes/add" method="post">
+    <form action="/homes/add" method="post" enctype="multipart/form-data">
         <div class="row g-0">
             <div class="col-md-4 p-3">
-                <form>
                     <div class="card">
-                        <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="img-fluid rounded" alt="Preview">
+                        <img src="/imgs/background.jpg" class="img-fluid rounded" alt="Preview" id="image-preview">
                     </div>
                     <div class="input-group mt-4">
-                        <input type="file" class="form-control" aria-label="Upload">
-                        <button class="btn btn-outline-secondary" type="submit">Upload</button>
+                        <input type="file" class="form-control" aria-label="Upload" name="image" id="image-file">
                     </div>
-                </form>
             </div>
-        
+            
             <div class="col-md-8 card-body">
+                
                 {% with messages = get_flashed_messages(category_filter=["home_info"]) %}
                     {% if messages %}
                     <ul class="alert-message block-message error">
@@ -45,7 +43,8 @@
                 <div class="row g-3 ">
                     <div class="form-group col-md-2 mb-3">
                         <label for="name" class=" text-success form-label">Owner:</label>
-                        <input type="text" name="name" class="form-control">
+                        <label for="name" class="form-control bg-white">{{user.first_name}}</label>
+                        <input type="hidden" name="name" value="{{user.first_name}}">
                     </div>
                     <div class="form-group col-md-1 mb-3">
                         <label for="street_address" class=" text-success form-label">Bed:</label>
@@ -98,10 +97,10 @@
                         <textarea name="description" class="form-control" rows="4"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="row g-3 my-4 d-flex justify-content-center">
-                <button type="submit" class="btn btn-secondary col-2">Add Home</button>
-            </div>
+        </div>
+        <div class="row g-3 my-4 d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary col-2">Add Home</button>
+        </div>
         </div>
         
     </form>

@@ -9,8 +9,6 @@ bcrypt = Bcrypt(app)
 @app.route('/')
 def index():
     all_homes = Home.get_all_homes()
-    for i in range(len(all_homes)):
-        print(i)
     single_homes = Home.get_homes_by_type({'type': 'Single Family Homes'})
     townhouse = Home.get_homes_by_type({'type': 'Townhouse'})
     multi_homes = Home.get_homes_by_type({'type': 'Multi Family Homes'})
@@ -21,7 +19,7 @@ def index():
 def login_success():
     user = User.login_validator(request.form)
     if not user:
-        flash("invalid email/password")
+        flash(u"invalid email/password", 'login')
         return redirect('/')
     session['user_id'] = user.id
     print(user.id)
@@ -35,7 +33,7 @@ def dashboard():
     user = User.fetch_id({"id":session['user_id']})
     if not user:
         return redirect('/')
-    return render_template('dashboard.html', user=user, homes= Home.fetch_all())
+    return render_template('dashboard.html', user=user, homes= Home.fetch_id({"id":session['user_id']}))
 
 
 

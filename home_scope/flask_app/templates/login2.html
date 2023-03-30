@@ -88,7 +88,8 @@
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg">
-                    <div id="carouselAllhomes" class="carousel slide">
+                    {% if all_homes %}
+                    <div id="carouselAllhomes" class="carousel slide" >
                     <div class="carousel-indicators">
                         {% for i in range(all_homes|length)%}
                             {% if i == 0 %}
@@ -101,17 +102,17 @@
                     <div class="carousel-inner">
                         {% for i in range(all_homes|length)%}
                             {% if i == 0 %}
-                            <div class="carousel-item active">
+                            <div class="carousel-item active" style="height: 24rem;">
                                 <a href="/homes/view/{{all_homes[i].type}}">
-                                <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                class="card-img-top" alt="{{all_homes[i].type}}">
+                                <img src="{{all_homes[i].image}}"
+                                class="card-img-top" alt="{{all_homes[i].type}}"  style="height: 24rem;">
                                 </a>
                             </div>
                             {% else %}
-                            <div class="carousel-item">
+                            <div class="carousel-item" style="height: 24rem;">
                                 <a href="/homes/view/{{all_homes[i].type}}">
-                                <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                class="card-img-top" alt="{{all_homes[i].type}}">
+                                <img src="{{all_homes[i].image}}"
+                                class="card-img-top" alt="{{all_homes[i].type}}" style="height: 24rem;">
                                 </a>
                             </div>
                             {% endif %}
@@ -126,6 +127,10 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                     </div>
+                    {% else %}
+                    <img src="https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg"
+                            class="img-fluid" alt="first">
+                    {% endif %}
                 </div>
                 <div class="col-md p-5">
                     <h2>Our Mission</h2>
@@ -142,6 +147,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
+                        {% if single_homes %}
                         <div id="carouselExampleIndicators" class="carousel slide">
                             <div class="carousel-indicators">
                                 {% for i in range(single_homes|length)%}
@@ -155,17 +161,17 @@
                             <div class="carousel-inner">
                                 {% for i in range(single_homes|length)%}
                                     {% if i == 0 %}
-                                    <div class="carousel-item active">
+                                    <div class="carousel-item active" style="height: 17rem;">
                                         <a href="/homes/view/{{single_homes[i].type}}">
-                                        <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg"
-                                        class="card-img-top" alt="{{single_homes[i].type}}">
+                                        <img src="{{single_homes[i].image}}"
+                                        class="card-img-top" alt="{{single_homes[i].type}}" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% else %}
                                     <div class="carousel-item">
                                         <a href="/homes/view/{{single_homes[i].type}}">
-                                        <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                        class="card-img-top" alt="town">
+                                        <img src="{{single_homes[i].image}}"
+                                        class="card-img-top" alt="town" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% endif %}
@@ -180,6 +186,10 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
+                        {% else %}
+                        <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg"
+                                class="card-img-top" alt="single">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">Single Family Homes</h5>
                         </div>
@@ -187,6 +197,7 @@
                 </div>
                 <div class="col-lg-4 d-none d-lg-block">
                     <div class="card">
+                        {% if townhouse %}
                         <div id="carouselTownhouse" class="carousel slide">
                             <div class="carousel-indicators">
                                 {% for i in range(townhouse|length)%}
@@ -197,20 +208,20 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <div class="carousel-inner">
+                            <div class="carousel-inner" style="height: 17rem;">
                                 {% for i in range(townhouse|length)%}
                                     {% if i == 0 %}
                                     <div class="carousel-item active">
                                         <a href="/homes/view/{{townhouse[i].type}}">
-                                        <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                        class="card-img-top" alt="{{townhouse[i].type}}">
+                                        <img src="{{townhouse[i].image}}"
+                                        class="card-img-top" alt="{{townhouse[i].type}}" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% else %}
                                     <div class="carousel-item">
                                         <a href="/homes/view/{{townhouse[i].type}}">
-                                        <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                        class="card-img-top" alt="town">
+                                        <img src="{{townhouse[i].image}}"
+                                        class="card-img-top" alt="town" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% endif %}
@@ -225,6 +236,10 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
+                        {% else %}
+                        <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
+                                class="card-img-top" alt="town">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">Townhouse</h5>
                         </div>
@@ -232,6 +247,7 @@
                 </div>
                 <div class="col-lg-4 d-none d-lg-block">
                     <div class="card">
+                        {% if multi_homes %}
                         <div id="carouselMulti_homes" class="carousel slide">
                             <div class="carousel-indicators">
                                 {% for i in range(multi_homes|length)%}
@@ -245,17 +261,17 @@
                             <div class="carousel-inner">
                                 {% for i in range(multi_homes|length)%}
                                     {% if i == 0 %}
-                                    <div class="carousel-item active">
+                                    <div class="carousel-item active"  style="height: 17rem;">
                                         <a href="/homes/view/{{multi_homes[i].type}}">
-                                        <img src="https://www.mashvisor.com/blog/wp-content/uploads/2020/03/Why-Small-Multi-Family-Homes-Are-the-Best-Income-Generating-Assets-for-Beginners.jpg"
-                                        class="card-img-top" alt="{{multi_homes[i].type}}">
+                                        <img src="{{multi_homes[i].image}}"
+                                        class="card-img-top" alt="{{multi_homes[i].type}}" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% else %}
                                     <div class="carousel-item">
                                         <a href="/homes/view/{{multi_homes[i].type}}">
-                                        <img src="https://inhabit.corcoran.com/wp-content/uploads/2021/11/brownstone_thumb-1024x683.jpg"
-                                        class="card-img-top" alt="{{multi_homes[i].type}}">
+                                        <img src="{{multi_homes[i].image}}"
+                                        class="card-img-top" alt="{{multi_homes[i].type}}" style="height: 17rem;">
                                         </a>
                                     </div>
                                     {% endif %}
@@ -270,6 +286,10 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
+                        {% else %}
+                        <img src="https://www.mashvisor.com/blog/wp-content/uploads/2020/03/Why-Small-Multi-Family-Homes-Are-the-Best-Income-Generating-Assets-for-Beginners.jpg"
+                                class="card-img-top" alt="multi">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">Multi Family Homes</h5>
                         </div>

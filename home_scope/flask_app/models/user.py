@@ -18,9 +18,6 @@ class User:
         self.created_at = db_data['created_at']
         self.updated_at = db_data['updated_at']
 
-
-
-
     @classmethod
     def save(cls,data_form):
         data_hashing = {

@@ -23,14 +23,14 @@
 <h2>Edit Home</h2>
 
 <div class="card mb-3 px-0">
-    <form action="/homes/update/{{home.id}}" method="post">
+    <form action="/homes/update/{{home.id}}" method="post" enctype="multipart/form-data">
         <div class="row g-0">
             <div class="col-md-4 p-3">
-                <form action="/homes/edit/{{home.id}}/upload_img">
-                    <img src="https://www.biggerpockets.com/blog/wp-content/uploads/2016/01/The-7-Vital-Steps-to-Buying-a-Single-Family-Rental-House-1024x683.jpg" class="img-fluid rounded" alt="single">
+                    <div class="card">
+                        <img src="/imgs/background.jpg" class="img-fluid rounded" alt="single">
+                    </div>
                     <div class="input-group mt-4">
-                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                        <button class="btn btn-outline-secondary" type="submit">Upload</button>
+                        <input type="file" class="form-control" name="image" aria-label="Upload">
                     </div>
                 </form>
             </div>
@@ -48,7 +48,8 @@
                 <div class="row g-3 ">
                     <div class="form-group col-md-2 mb-3">
                         <label for="name" class=" text-success form-label">Owner:</label>
-                        <input type="text" name="name" class="form-control" value="{{home.name}}">
+                        <label for="name" class="form-control bg-white">{{user.first_name}}</label>
+                        <input type="hidden" name="name" value="{{user.first_name}}">
                     </div>
                     <div class="form-group col-md-1 mb-3">
                         <label for="street_address" class=" text-success form-label">Bed:</label>

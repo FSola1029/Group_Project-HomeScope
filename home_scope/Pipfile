@@ -12,6 +12,7 @@ cryptography = "*"
 bcrypt = "*"
 flask-wtf = "*"
 flask-uploads = "*"
+cloudinary = "*"
 
 [dev-packages]
 

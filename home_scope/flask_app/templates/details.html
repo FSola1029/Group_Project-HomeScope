@@ -1,9 +1,23 @@
 <!-- new.html -->
 {% extends 'index.html' %}
 
-{% block title %}Home Listings{% endblock %}
+{% block title %}Home Details{% endblock %}
 
 {% block nav %}
+{% if user %}
+<h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
+<div class="d-flex">
+    <div class="p-2">
+        <a href="/homes/new" class="btn btn-md btn-secondary">Add Homes</a>
+    </div>
+    <div class="p-2">
+        <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
+    </div>
+    <div class="p-2">
+        <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
+    </div>
+</div>
+{% else %}
 <a href="/"><img src="/imgs/logo.png" width="400" alt="logo"></a>
 
 <!-- Login/Registration Buttons -->
@@ -80,29 +94,49 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}
-
+            
 {% block content %}
-<h2>{{homes[0].type}} Listings</h2>
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    {% for home in homes %}
-    <div class="col">
-        <div class="card">
-            <a href="/homes/details/{{home.id}}">
-            <img src="{{home.image}}" class="card-img-top" alt="single" style="height: 20rem;">
-            </a>
-            <div class="card-body">
-                <h5 class="card-title">$ {{ '{:,.2f}'.format(home.price) }}</h5>
-                <p class="card-text">{{home.bed}} bds | {{home.bath}} ba | {{home.sq_ft}} sqft - {{home.type}}</p>
-                <div class="card-text d-flex justify-content-between align-items-center">
-                    <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+
+<h2>Home Details - <a href="/homes/view/{{home.type}}" class="text-decoration-none text-dark">{{home.type}}</a></h2>
+
+<div class="card mb-3 px-0">
+        <div class="row g-0">
+            <div class="col-md-4 m-auto p-auto">
+                <img src="{{home.image}}" class="img-fluid rounded" alt="single" style="height: 20rem;">
+            </div>
+        
+            <div class="col-md-8 card-body">
+                <div class="row g-3 ">
+                    <div class="form-group col-md-2 mb-3">
+                        <label for="name" class=" text-success form-label"><b>Owner:</b></label>
+                        <p>{{home.name}}</p>
+                    </div>
+                    <div class="form-group col-md-7 mb-3">
+                        <label for="street_address" class=" text-success form-label"><b>Basic Information:</b></label>
+                        <p>{{home.bed}} beds, {{home.bath}} baths, {{home.sq_ft}} sqft - {{home.type}}</p>
+                    </div>
+                    <div class="form-group col-md-2 mb-3">
+                        <label for="price" class="text-success form-label"><b>Selling Price:</b></label>
+                        <p>$ {{ '{:,.2f}'.format(home.price) }}</p>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="street_address" class=" text-success form-label"><b>Home Address:</b></label>
+                        <p>{{home.street_address}}, {{home.city}}, {{home.state}} {{home.zipcode}}</p>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="description" class=" text-success form-label"><b>Description:</b></label>
+                        <p>{{home.description}}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
-    
 </div>
 {% endblock %}
 
-{% set page = 'view' %}
+{% set page = 'details' %}
+
+
+
+
