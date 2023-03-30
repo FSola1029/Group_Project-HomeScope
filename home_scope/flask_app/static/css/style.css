@@ -79,7 +79,7 @@ nav {
 }
 
 .btn-hover.grad {
-    background-image: linear-gradient(to right, #4c373a, #b43516, #ef9d43, #e75516);
+    background-image: linear-gradient(to right, #55484a, #664d46, #ef9d43, #3e2317);
     box-shadow: 0 4px 15px 0 rgba(130, 78, 80, 0.75);
 }
 

@@ -10,7 +10,7 @@
         <div class="d-flex">
             <div class="login p-2">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
+                    <button type="button" class="btn btn-md btn-hover grad dropdown-toggle"
                         data-bs-toggle="dropdown">Login</button>
                     <div class="dropdown-menu col-md-6">
                         <form action="/user/login" method="post" class="col-10 mx-auto border-0 p-0">
@@ -40,7 +40,7 @@
             </div>
             <div class="register p-2">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
+                    <button type="button" class="btn btn-md btn-hover grad dropdown-toggle" data-bs-toggle="dropdown">Register</button>
                     <div class="dropdown-menu col-md-6">
                         <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
                             <div>
@@ -83,6 +83,7 @@
 {% endblock %}
 
 {% block content %}
+
     <!-- Our Mission -->
     <section id="mission" class="p-4">
         <div class="container">

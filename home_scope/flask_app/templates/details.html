@@ -1,20 +1,20 @@
 <!-- new.html -->
 {% extends 'index.html' %}
 
-{% block title %}Home Details{% endblock %}
+{% block title %}Listing Details{% endblock %}
 
 {% block nav %}
 {% if user %}
 <h1 class="p-0 text-dark col-6">Welcome, {{user.first_name|capitalize}}.</h1>
 <div class="d-flex">
     <div class="p-2">
-        <a href="/homes/new" class="btn btn-md btn-secondary">Add Homes</a>
+        <a href="/homes/new" class="btn btn-md btn-hover grad">Add Listing</a>
     </div>
     <div class="p-2">
-        <a href="/dashboard" class="btn btn-md btn-secondary">Dashboard</a>
+        <a href="/dashboard" class="btn btn-md btn-hover grad">Dashboard</a>
     </div>
     <div class="p-2">
-        <a href="/user/logout" class="btn btn-md btn-secondary">Logout</a>
+        <a href="/user/logout" class="btn btn-md btn-hover grad">Logout</a>
     </div>
 </div>
 {% else %}
@@ -24,7 +24,7 @@
 <div class="d-flex">
     <div class="login p-2">
         <div class="dropdown">
-            <button type="button" class="btn btn-md btn-secondary dropdown-toggle"
+            <button type="button" class="btn btn-md btn-hover grad dropdown-toggle"
                 data-bs-toggle="dropdown">Login</button>
             <div class="dropdown-menu col-md-6">
                 <form action="/user/login" method="post" class="col-10 mx-auto border-0 p-0">
@@ -47,14 +47,14 @@
                         <label for="password" class="text-info form-label text-dark">Password:</label> 
                         <input type="password" name="password" id="password" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-sm btn-secondary">Login</button>
+                    <button type="submit" class="btn btn-sm btn-hover grad">Login</button>
                 </form>
             </div>
         </div>
     </div>
     <div class="register p-2">
         <div class="dropdown">
-            <button type="button" class="btn btn-md btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Register</button>
+            <button type="button" class="btn btn-md btn-hover grad dropdown-toggle" data-bs-toggle="dropdown">Register</button>
             <div class="dropdown-menu col-md-6">
                 <form action="/user/register" method="post" class="col-10 mx-auto border-0 p-0">
                     <div>
@@ -88,7 +88,7 @@
                         <label for="confirm_password" class="text-info form-label text-dark">Confirm Password:</label> 
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-sm btn-secondary">Register</button>
+                    <button type="submit" class="btn btn-sm btn-hover grad">Register</button>
                 </form>
             </div>
         </div>
